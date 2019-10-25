@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.store08.mapper.AreaMapper">
+    <select id="findArea" resultType="com.aaa.store08.entity.AreaVo">
+       select * from area
+    </select>
+    <select id="findCount" resultType="int">
+     select count(dId) from desk
+    </select>
+    <select id="SelDeskAll"  parameterType="map"   resultType="map">
+      select d.dId,d.dName,a.aName,d.dsort from desk d,area a where d.dArea = a.aId limit #{begin},#{count}
+    </select>
+    <insert id="AddDesk" parameterType="com.aaa.store08.entity.AreaVo">
+            insert into desk(dName,dArea,dsort) VALUES(#{dName},#{dArea},'未使用')
+    </insert>
+    <delete id="DelDesk" parameterType="int">
+             delete from desk where dId=#{dId}
+    </delete>
+    <update id="UpdDsort" parameterType="com.aaa.store08.entity.AreaVo">
+             update  desk set dsort=#{dsort} where dId=#{dId}
+    </update>
+    <update id="UpdDesk" parameterType="com.aaa.store08.entity.AreaVo">
+             update  desk set dName=#{dName} where dId=#{dId}
+    </update>
+</mapper>
