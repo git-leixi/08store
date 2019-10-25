@@ -8,18 +8,12 @@
     <script src="../common/layui/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<form class="layui-form" action="../../Area/AreaAdd" method="post" lay-filter="prg" style="margin-top: 2%">
+<form class="layui-form" action="../Area/AreaAdd" method="post" lay-filter="prg" style="margin-top: 2%">
     <div class="layui-form-item">
         <label class="layui-form-label">选择框</label>
         <div class="layui-input-block">
             <select name="dArea" lay-verify="required">
-                <option value="1"  >A区</option>
-                <option value="2">B区</option>
-                <option value="3">C区</option>
-                <option value="4">D区</option>
-                <option value="5">E区</option>
-                <option value="6">F区</option>
-                <option value="7">G区</option>
+                <option th:each="area:${area}" th:value="${area.aId}" th:text="${area.aName}"></option>
             </select>
         </div>
     </div>

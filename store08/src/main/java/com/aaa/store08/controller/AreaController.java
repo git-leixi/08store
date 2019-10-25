@@ -32,7 +32,9 @@ public class AreaController {
         return dg;
     }
     @RequestMapping("toAreaAdd")
-    public String toAreaAdd(AreaVo areaVo) {
+    public String toAreaAdd(AreaVo areaVo,Model model) {
+        List<AreaVo> area=as.findArea();
+        model.addAttribute("area",area);
         return "page/area/AreaAdd";
     }
     @RequestMapping("AreaAdd")
