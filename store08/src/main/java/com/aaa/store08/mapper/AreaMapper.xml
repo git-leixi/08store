@@ -3,13 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaa.store08.mapper.AreaMapper">
     <select id="findArea" resultType="com.aaa.store08.entity.AreaVo">
-       select * from area
+       select distinct aName from area
     </select>
-    <select id="findCount" resultType="int">
-     select count(dId) from desk
+    <select id="findCount" resultType="int" parameterType="com.aaa.store08.entity.AreaVo">
+        select count(dId) from desk where 1=1
+        <if test="aName!=null and aName!='全部'">
+        and dArea=(select aId from area where aName=#{aName})
+        </if>
+
     </select>
     <select id="SelDeskAll"  parameterType="map"   resultType="map">
-      select d.dId,d.dName,a.aName,d.dsort from desk d,area a where d.dArea = a.aId limit #{begin},#{count}
+      select d.dId,d.dName,a.aName,d.dsort from desk d,area a where d.dArea = a.aId
+      <if test="aName!=null">
+      and a.aName=#{aName}
+      </if>
+        limit #{begin},#{count}
     </select>
     <insert id="AddDesk" parameterType="com.aaa.store08.entity.AreaVo">
             insert into desk(dName,dArea,dsort) VALUES(#{dName},#{dArea},'未使用')

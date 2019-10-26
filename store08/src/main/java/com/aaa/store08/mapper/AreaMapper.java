@@ -9,7 +9,7 @@ import java.util.Map;
 @Mapper
 public interface AreaMapper {
     public List<AreaVo> findArea();
-    public int findCount();
+    public int findCount(AreaVo areaVo);
 
     public List<Map> SelDeskAll(Map<String,Object> map);
     public int AddDesk(AreaVo areaVo);

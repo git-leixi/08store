@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 public interface AreaService {
     public List<AreaVo> findArea();
-    public int findCount();
+    public int findCount(AreaVo areaVo);
 
-    public List<Map> SelDeskAll(PageVo pageVo);
+    public List<Map> SelDeskAll(PageVo pageVo,String aName);
 
     public int AddDesk(AreaVo areaVo);
 

@@ -22,16 +22,26 @@ public class IAreaService implements AreaService {
     }
 
     @Override
-    public int findCount() {
-        return am.findCount();
+    public int findCount(AreaVo areaVo) {
+        return am.findCount(areaVo);
     }
     @Override
-    public List<Map> SelDeskAll(PageVo pageVo) {
+    public List<Map> SelDeskAll(PageVo pageVo,String aName) {
+
+        if (aName!=null){
+        }else {
+            aName="全部";
+        }
+        if (aName.equals("全部")){
+            aName=null;
+        }
+
             Map<String,Object> map = new HashMap<String,Object>();
             int count = pageVo.getLimit();
             int begin =pageVo.getLimit() * (pageVo.getPage() - 1);
             map.put("count",count);
             map.put("begin",begin);
+            map.put("aName",aName);
             return am.SelDeskAll(map);
         }
 
