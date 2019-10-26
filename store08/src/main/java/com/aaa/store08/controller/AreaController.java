@@ -18,13 +18,23 @@ import java.util.Map;
 public class AreaController {
     @Autowired
     private AreaService as;
+    @RequestMapping("toArea")
+    public String toArea(AreaVo areaVo,Model model) {
+        List<AreaVo> area=as.findArea();
+        model.addAttribute("area",area);
+        System.out.println(area);
+        return "page/area/Area";
+    }
     @RequestMapping("AreaSelect")
     @ResponseBody
-    public Object SelFood(PageVo pageVo) {
-        System.out.println(111);
+    public Object SelFood(PageVo pageVo,String aName) {
         DataGrid dg = new DataGrid();
-        int count = as.findCount();
-        List<Map> maps = as.SelDeskAll(pageVo);
+        System.out.println(aName);
+        AreaVo areaVo=new AreaVo();
+        areaVo.setaName(aName);
+        int count = as.findCount(areaVo);
+        System.out.println(aName+"--"+count);
+        List<Map> maps = as.SelDeskAll(pageVo,aName);
         dg.setCode(0);
         dg.setCount(count);
         dg.setData(maps);
