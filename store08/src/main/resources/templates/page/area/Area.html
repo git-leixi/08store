@@ -62,7 +62,7 @@
                 layer.confirm('真的删除行么', function(index){
                     $.ajax({
                         type:"GET",
-                        url:"../../Area/AreaDel?dId="+data.dId,
+                        url:"../Area/AreaDel?dId="+data.dId,
                         success:function(result){
                              alert("删除成功");
                             layer.close(index);

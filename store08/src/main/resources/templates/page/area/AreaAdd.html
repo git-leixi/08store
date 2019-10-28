@@ -8,38 +8,48 @@
     <script src="../common/layui/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<form class="layui-form" action="../Area/AreaAdd" method="post" lay-filter="prg" style="margin-top: 2%">
-    <div class="layui-form-item">
         <label class="layui-form-label">选择框</label>
-        <div class="layui-input-block">
-            <select name="dArea" lay-verify="required">
-                <option th:each="area:${area}" th:value="${area.aId}" th:text="${area.aName}"></option>
+            <select  name="dArea" th:id="aName" style="width: 200px;height: 35px;border:1px solid #E6E6E6;">
+                <option style="text-align: center;"   th:each="area:${area}" th:value="${area.aId}" th:text="${area.aName}"></option>
             </select>
-        </div>
-    </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="width: 350px;">
         <label class="layui-form-label">桌号</label>
         <div class="layui-input-block">
-            <input type="text" name="dName" required  lay-verify="required" placeholder="请输入桌号" autocomplete="off" class="layui-input">
+            <input th:id="dName" type="text" name="dName" required  lay-verify="required" placeholder="请输入桌号" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="closeCurrForm()">立即提交</button>
+            <button class="layui-btn" lay-button lay-filter="formDemo" onclick="closeCurrForm()">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary" onclick="closeCurrForm()">取消</button>
         </div>
     </div>
-</form>
 <script>
     layui.use(['form', 'upload', 'layer'], function () {
         var form = layui.form;
-
 //检查项目添加到下拉框中
     });
     function closeCurrForm(){
-        //获取窗口索引
-       var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
+        var aName=$("#aName").find("option:selected").text();
+        var dName=$("#dName").val();
+        if(dName==""){
+            layer.msg('有必填框未填入对应值！', {
+                time: 5000, //5s后自动关闭
+                btn: ['明白了']
+            });
+        }else {
+            $.ajax({
+                type:"GET",
+                url:"../Area/AreaAdd",
+                data:{aName:aName,dName:dName},
+                success:function(result){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    setTimeout('window.location.reload()',0);
+                }
+            });
+        }
+
     }
 </script>
 

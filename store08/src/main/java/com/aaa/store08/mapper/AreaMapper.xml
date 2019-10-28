@@ -20,7 +20,7 @@
         limit #{begin},#{count}
     </select>
     <insert id="AddDesk" parameterType="com.aaa.store08.entity.AreaVo">
-            insert into desk(dName,dArea,dsort) VALUES(#{dName},#{dArea},'未使用')
+            insert into desk(dName,dArea,dsort) VALUES(#{dName},(select aId from area where aName=#{aName}),'未使用')
     </insert>
     <delete id="DelDesk" parameterType="int">
              delete from desk where dId=#{dId}

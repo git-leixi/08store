@@ -22,7 +22,6 @@ public class AreaController {
     public String toArea(AreaVo areaVo,Model model) {
         List<AreaVo> area=as.findArea();
         model.addAttribute("area",area);
-        System.out.println(area);
         return "page/area/Area";
     }
     @RequestMapping("AreaSelect")
@@ -48,7 +47,11 @@ public class AreaController {
         return "page/area/AreaAdd";
     }
     @RequestMapping("AreaAdd")
-    public String AreaAdd(AreaVo areaVo) {
+    public String AreaAdd(String aName,String dName) {
+        AreaVo areaVo=new AreaVo();
+        System.out.println("添加事件");
+        areaVo.setaName(aName);
+        areaVo.setdName(dName);
         System.out.println(areaVo);
         as.AddDesk(areaVo);
         return "page/area/Area";
