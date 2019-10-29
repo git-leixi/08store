@@ -1,5 +1,6 @@
 package com.aaa.store08.mapper;
 
+import com.aaa.store08.entity.Area;
 import com.aaa.store08.entity.AreaVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,6 +10,9 @@ import java.util.Map;
 @Mapper
 public interface AreaMapper {
     public List<AreaVo> findArea();
+
+    public List<Area> SelArea();
+
     public int findCount(AreaVo areaVo);
 
     public List<Map> SelDeskAll(Map<String,Object> map);

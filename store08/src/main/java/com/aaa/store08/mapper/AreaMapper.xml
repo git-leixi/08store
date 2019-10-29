@@ -5,6 +5,9 @@
     <select id="findArea" resultType="com.aaa.store08.entity.AreaVo">
        select distinct aName from area
     </select>
+    <select id="SelArea" resultType="Area">
+        select aId,aName from area
+    </select>
     <select id="findCount" resultType="int" parameterType="com.aaa.store08.entity.AreaVo">
         select count(dId) from desk where 1=1
         <if test="aName!=null and aName!='全部'">

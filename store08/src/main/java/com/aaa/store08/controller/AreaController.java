@@ -7,11 +7,19 @@ import com.aaa.store08.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("Area")
@@ -82,4 +90,37 @@ public class AreaController {
     }
 
 
+
+    //文件上传
+
+
+    @RequestMapping("upload")
+
+    public String uploadImg(MultipartFile file) {
+        if (null != file) {
+            String myFileName = file.getOriginalFilename();// 文件原名称
+            String pat="E:\\app-git\\08store\\store08\\src\\main\\resources\\templates\\common\\image\\img\\";//获取文件保存路径
+
+            File fileDir=new File(pat);
+            if (!fileDir.exists()) { //如果不存在 则创建
+                fileDir.mkdirs();
+            }
+            String path=pat+myFileName;
+            System.out.println(path);
+            File localFile = new File(path);
+            try {
+                file.transferTo(localFile);
+                return pat+myFileName;
+            } catch (IllegalStateException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("文件为空");
+        }
+        return null;
+    }
 }

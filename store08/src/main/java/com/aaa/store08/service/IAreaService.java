@@ -1,5 +1,6 @@
 package com.aaa.store08.service;
 
+import com.aaa.store08.entity.Area;
 import com.aaa.store08.entity.AreaVo;
 import com.aaa.store08.entity.PageVo;
 import com.aaa.store08.mapper.AreaMapper;
@@ -19,6 +20,11 @@ public class IAreaService implements AreaService {
     @Override
     public List<AreaVo> findArea() {
         return am.findArea();
+    }
+
+    @Override
+    public List<Area> SelArea() {
+        return am.SelArea();
     }
 
     @Override
