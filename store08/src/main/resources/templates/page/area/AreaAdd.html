@@ -43,9 +43,10 @@
                 url:"../Area/AreaAdd",
                 data:{aName:aName,dName:dName},
                 success:function(result){
+                    window.parent.location.reload();
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
-                    setTimeout('window.location.reload()',0);
+
                 }
             });
         }

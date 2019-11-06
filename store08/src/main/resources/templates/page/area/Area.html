@@ -64,7 +64,6 @@
                         type:"GET",
                         url:"../Area/AreaDel?dId="+data.dId,
                         success:function(result){
-                             alert("删除成功");
                             layer.close(index);
                             setTimeout('window.location.reload()',0);
                             }
@@ -77,18 +76,27 @@
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
-            layer.confirm('确定要修改此内容？', function(index){
+            layer.confirm('确定要修改此内容？',{btn: ['确定', '取消']},
+              function(index){
                $.ajax({
                     type:"GET",
                     url:"../Area/AreaUpd",
                     data:{dId:data.dId,dName:data.dName},
                     success:function(result){
-                        layer.msg('[编号: '+ data.dId +'] ' + field + ' 字段更改为：'+ value);
                         layer.close(index);
                         setTimeout('window.location.reload()',0);
-                    }
+                    },
+                   error:function(){
+                       setTimeout('window.location.reload()',0);
+                   }
                 });
-            });
+
+            },
+            function(){
+                setTimeout('window.location.reload()',0);
+            }
+            );
+
         });
         //监听使用状态
         form.on('switch(dsort)', function(obj){
